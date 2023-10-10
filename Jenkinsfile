@@ -1,43 +1,32 @@
 pipeline {
     agent any
-    
     stages {
         stage('Build JAR') {
             steps {
                 sh 'jar -cvf 645hw2.war *'
-                sh 'ls'
             }
         }
-        
-        stage('Build Docker Image') {
+        stage('Build Docker image') {
             steps {
                 sh 'docker build -t madhavnemani/sixfourfive .'
             }
         }
-        
-        stage('Docker Login') {
+        stage('Login to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh '''
-                        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-                    '''
-                }
+                sh 'docker login -u madhavnemani -p xijdag-reqxoQ-wabte9'
             }
         }
-        
-        stage('Push Docker Image') {
+        stage('Push Docker image') {
             steps {
                 sh 'docker push madhavnemani/sixfourfive'
             }
         }
-        
-        stage('Copy Kube Config') {
+        stage('Copy kubeconfig') {
             steps {
                 sh 'cp config ~/.kube/config'
             }
         }
-        
-        stage('Restart Kubernetes Deployment') {
+        stage('Restart deployment') {
             steps {
                 sh 'kubectl rollout restart deployment/sixfourfive'
             }
