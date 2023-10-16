@@ -1,4 +1,8 @@
 // Author: Sundara Madhav Nemani
+// Author: Akhil Krishna Sai Takkella
+// Author: Sai Krishna Chaitanya Srirangam
+// Author: Pranitha Kakumanu
+// Author: Ashana Shetty
 // Description: This page contains all the javascript helper functions for the survey page
 
 // Helper function to validate Raffle Numbers
