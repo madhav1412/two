@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Login to Docker Hub') {
             steps {
-                sh 'docker login -u madhavnemani -p xijdag-reqxoQ-wabte9'
+                sh 'docker login -u madhavnemani -p {{pass}}'
             }
         }
         stage('Push Docker image') {
